@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بطاقة عمل فاخرة | محمد عبدالوهاب البدوي</title>
+
+<!-- الخطوط -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --green-900:#06301f;
+    --green-800:#0b5d3b;
+    --green-600:#128a56;
+    --gold-100:#fdf6dd;
+    --gold-300:#f6e7a8;
+    --gold-400:#e8c766;
+    --gold-500:#c9a227;
+    --gold-700:#8f6d16;
+    --white:#ffffff;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  body{
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    padding:28px 16px;
+    font-family:'Cairo', system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at 12% 12%, #e9f5ef 0%, transparent 55%),
+      radial-gradient(circle at 88% 88%, #fbf5e0 0%, transparent 55%),
+      #f4f6f2;
+  }
+
+  /* ====== البطاقة ====== */
+  .card{
+    position:relative;
+    width:min(640px, 94vw);
+    padding:54px 38px 44px;
+    background:var(--white);
+    border-radius:22px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    isolation:isolate;
+    box-shadow:
+      0 32px 70px -28px rgba(6,48,31,.55),
+      0 10px 26px -14px rgba(6,48,31,.28),
+      0 0 0 1px rgba(201,162,39,.28);
+    animation:rise .8s cubic-bezier(.2,.7,.3,1) both;
+  }
+
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(26px) scale(.97); }
+    to  { opacity:1; transform:translateY(0)   scale(1); }
+  }
+
+  .card::after{
+    content:"";
+    position:absolute; inset:0; z-index:0;
+    background:
+      radial-gradient(circle at 100% 0%,  rgba(201,162,39,.16), transparent 44%),
+      radial-gradient(circle at 0% 100%,  rgba(11,93,59,.13),  transparent 44%);
+    pointer-events:none;
+  }
+
+  /* الإطار الذهبي المتدرج الداخلي */
+  .card::before{
+    content:"";
+    position:absolute; inset:12px; z-index:3;
+    border-radius:14px;
+    padding:1.5px;
+    background:linear-gradient(135deg,
+      #fdf6dd 0%, #c9a227 22%, #8f6d16 45%,
+      #f6e7a8 58%, #c9a227 78%, #fdf6dd 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    pointer-events:none;
+  }
+
+  /* الشريط العلوي والسفلي */
+  .edge{
+    position:absolute; left:0; right:0; height:7px; z-index:1;
+    background:linear-gradient(90deg,
+      #0b5d3b, #128a56 18%, #c9a227 46%,
+      #f6e7a8 50%, #c9a227 54%, #128a56 82%, #0b5d3b);
+  }
+  .edge.top{ top:0; }
+  .edge.bottom{ bottom:0; transform:scaleX(-1); }
+
+  /* ====== المحتوى ====== */
+  .content{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+  }
+
+  /* الشعار الدائري */
+  .emblem{
+    position:relative;
+    width:78px; height:78px;
+    border-radius:50%;
+    display:grid; place-items:center;
+    margin-bottom:16px;
+    background:#fff;
+    box-shadow:
+      0 0 0 1.5px var(--gold-500),
+      0 0 0 6px rgba(201,162,39,.10),
+      0 14px 28px -14px rgba(11,93,59,.6);
+  }
+  .emblem::before{
+    content:"";
+    position:absolute; inset:6px;
+    border-radius:50%;
+    background:linear-gradient(140deg,#fdf8e6 0%,#ffffff 45%,#f7eed2 100%);
+    border:1px solid rgba(201,162,39,.45);
+  }
+  .emblem span{
+    position:relative; z-index:1;
+    font-family:'Amiri', serif;
+    font-size:2.1rem;
+    line-height:1;
+    padding-bottom:8px;
+    background:linear-gradient(180deg,#e2c163 0%,#c9a227 40%,#8f6d16 100%);
+    -webkit-background-clip:text;
+            background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:var(--gold-700);
+  }
+
+  /* الاسم */
+  .name{
+    font-size:clamp(1.35rem, 3.6vw, 1.95rem);
+    font-weight:900;
+    line-height:1.55;
+    letter-spacing:.2px;
+    background:linear-gradient(180deg,#128a56 0%,#0b5d3b 45%,#06301f 100%);
+    -webkit-background-clip:text;
+            background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:var(--green-900);
+  }
+
+  /* الفاصل الذهبي */
+  .divider{
+    display:flex; align-items:center; gap:9px;
+    margin:12px 0 14px;
+  }
+  .divider::before,
+  .divider::after{
+    content:"";
+    width:56px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold-500));
+  }
+  .divider::after{
+    background:linear-gradient(90deg, var(--gold-500), transparent);
+  }
+  .divider .gem{
+    width:7px; height:7px;
+    transform:rotate(45deg);
+    background:linear-gradient(135deg, var(--gold-300), var(--gold-500) 55%, var(--gold-700));
+    box-shadow:0 0 10px rgba(201,162,39,.75);
+  }
+
+  /* سطر الرقم */
+  .contact-line{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:22px;
+    padding:6px 16px;
+    border-radius:999px;
+    background:rgba(11,93,59,.045);
+    border:1px solid rgba(201,162,39,.35);
+  }
+  .contact-line svg{ flex:none; }
+  .number{
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:.8px;
+    color:var(--green-800);
+    direction:ltr;
+    unicode-bidi:embed;
+    white-space:nowrap;
+  }
+
+  /* ====== الأزرار ====== */
+  .actions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    width:100%;
+  }
+
+  .btn{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:12px 24px;
+    border-radius:999px;
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:.95rem;
+    line-height:1.2;
+    text-decoration:none;
+    cursor:pointer;
+    border:1px solid transparent;
+    white-space:nowrap;
+    transition:transform .25s ease, box-shadow .25s ease,
+               border-color .25s ease, background .25s ease, color .25s ease;
+  }
+  .btn:hover{ transform:translateY(-3px); }
+  .btn:active{ transform:translateY(-1px); }
+  .btn:focus-visible{
+    outline:2px solid var(--gold-500);
+    outline-offset:3px;
+  }
+
+  /* زر واتساب */
+  .btn-wa{
+    color:#fff;
+    background:linear-gradient(135deg,#128a56 0%,#0b5d3b 55%,#06301f 100%);
+    box-shadow:
+      0 14px 28px -16px rgba(11,93,59,.95),
+      inset 0 1px 0 rgba(255,255,255,.18);
+  }
+  .btn-wa::after{
+    content:"";
+    position:absolute; inset:0; border-radius:inherit;
+    padding:1.2px;
+    background:linear-gradient(135deg,var(--gold-400),var(--gold-700) 50%,var(--gold-300));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    pointer-events:none;
+  }
+  .btn-wa:hover{
+    box-shadow:
+      0 20px 34px -16px rgba(11,93,59,.9),
+      0 0 0 3px rgba(201,162,39,.18),
+      inset 0 1px 0 rgba(255,255,255,.22);
+  }
+
+  /* زر دفتر الهاتف */
+  .btn-contact{
+    color:var(--green-800);
+    background:linear-gradient(135deg,#f2fbf6 0%,#ffffff 55%,#eefaf3 100%);
+    border-color:rgba(11,93,59,.18);
+    box-shadow:
+      0 12px 24px -16px rgba(11,93,59,.9),
+      inset 0 1px 0 #fff;
+  }
+  .btn-contact:hover{
+    border-color:rgba(201,162,39,.85);
+    box-shadow:
+      0 18px 32px -16px rgba(11,93,59,.8),
+      0 0 0 3px rgba(201,162,39,.14),
+      inset 0 1px 0 #fff;
+  }
+
+  /* ====== التنبيه ====== */
+  .toast{
+    position:fixed;
+    bottom:26px; left:50%;
+    transform:translate(-50%,22px);
+    background:linear-gradient(135deg,#0b5d3b,#06301f);
+    color:var(--gold-300);
+    padding:12px 24px;
+    border-radius:999px;
+    font-family:'Cairo', sans-serif;
+    font-size:.88rem;
+    font-weight:600;
+    text-align:center;
+    max-width:90vw;
+    box-shadow:
+      0 18px 34px -18px rgba(6,48,31,.95),
+      inset 0 0 0 1px rgba(201,162,39,.55);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .35s ease, transform .35s ease;
+    z-index:99;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+  }
+
+  /* ====== الاستجابة ====== */
+  @media (max-width:520px){
+    .card{ padding:44px 20px 36px; border-radius:18px; }
+    .emblem{ width:66px; height:66px; margin-bottom:13px; }
+    .emblem span{ font-size:1.8rem; padding-bottom:6px; }
+    .divider::before, .divider::after{ width:38px; }
+    .contact-line{ margin-bottom:18px; padding:5px 13px; }
+    .number{ font-size:.92rem; letter-spacing:.5px; }
+    .actions{ flex-direction:column; gap:10px; }
+    .btn{ width:100%; padding:12px 18px; font-size:.92rem; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  @media print{
+    body{ background:#fff; padding:0; }
+    .card{ box-shadow:none; }
+    .actions, .toast{ display:none; }
+  }
+</style>
+</head>
+
+<body>
+
+  <article class="card" role="figure" aria-label="بطاقة عمل محمد عبدالوهاب البدوي">
+
+    <!-- الأشرطة العلوية والسفلية -->
+    <div class="edge top"></div>
+    <div class="edge bottom"></div>
+
+    <div class="content">
+
+      <!-- الشعار -->
+      <div class="emblem" aria-hidden="true"><span>م</span></div>
+
+      <!-- الاسم -->
+      <h1 class="name">محمد عبدالوهاب البدوي</h1>
+
+      <!-- الفاصل -->
+      <div class="divider" aria-hidden="true"><i class="gem"></i></div>
+
+      <!-- الرقم -->
+      <p class="contact-line">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+          <path fill="#25D366" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.17-1.56-1.17-2.97 0-1.41.74-2.11 1-2.4.26-.29.57-.36.76-.36h.55c.18 0 .42-.07.65.5.24.59.83 2.04.9 2.19.07.15.12.32.02.51-.1.19-.15.31-.3.48-.15.17-.31.38-.44.51-.15.15-.31.31-.13.6.17.29.77 1.27 1.65 2.06 1.14 1.01 2.1 1.32 2.4 1.47.3.15.47.13.65-.07.17-.19.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.7-.17 1.38z"/>
+        </svg>
+        <span class="number">+249 11 136 1351</span>
+      </p>
+
+      <!-- الأزرار -->
+      <div class="actions">
+
+        <!-- إرسال رسالة واتساب (يفتح المحادثة برسالة جاهزة) -->
+        <a class="btn btn-wa"
+           id="waBtn"
+           href="https://wa.me/249111361351"
+           target="_blank"
+           rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="#ffffff" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.17-1.56-1.17-2.97 0-1.41.74-2.11 1-2.4.26-.29.57-.36.76-.36h.55c.18 0 .42-.07.65.5.24.59.83 2.04.9 2.19.07.15.12.32.02.51-.1.19-.15.31-.3.48-.15.17-.31.38-.44.51-.15.15-.31.31-.13.6.17.29.77 1.27 1.65 2.06 1.14 1.01 2.1 1.32 2.4 1.47.3.15.47.13.65-.07.17-.19.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.7-.17 1.38z"/>
+          </svg>
+          إرسال رسالة واتساب
+        </a>
+
+        <!-- إضافة إلى دفتر الهاتف -->
+        <button class="btn btn-contact" type="button" id="saveContact">
+          <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+            <path fill="#0b5d3b" d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 12c4.42 0 8 2.24 8 5v1H4v-1c0-2.76 3.58-5 8-5z"/>
+            <path fill="#c9a227" d="M18.5 15.5h1.8v2.2h2.2v1.8h-2.2v2.2h-1.8v-2.2h-2.2v-1.8h2.2z"/>
+          </svg>
+          إضافة إلى دفتر الهاتف
+        </button>
+
+      </div>
+
+    </div>
+  </article>
+
+  <!-- تنبيه -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  /* ====== البيانات ====== */
+  var FULL_NAME = "محمد عبدالوهاب البدوي";
+  var PHONE_INTL = "+249111361351";              // صيغة دولية بدون مسافات
+  var WA_NUMBER  = "249111361351";               // صيغة واتساب
+  var WA_MESSAGE = "السلام عليكم أستاذ محمد عبدالوهاب البدوي، أرغب في التواصل معكم.";
+
+  /* ====== 1) رابط واتساب مع رسالة جاهزة ====== */
+  document.getElementById("waBtn").href =
+    "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(WA_MESSAGE);
+
+  /* ====== 2) إنشاء ملف vCard وإضافته لدفتر الهاتف ====== */
+  var vcardLines = [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    "N:البدوي;محمد عبدالوهاب;;;",
+    "FN:" + FULL_NAME,
+    "TEL;TYPE=CELL,VOICE:" + PHONE_INTL,
+    "END:VCARD"
+  ];
+  var VCARD = vcardLines.join("\r\n");
+
+  var toast = document.getElementById("toast");
+  var toastTimer;
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){
+      toast.classList.remove("show");
+    }, 4200);
+  }
+
+  document.getElementById("saveContact").addEventListener("click", function(){
+    try{
+      // BOM لضمان قراءة الأحرف العربية بشكل صحيح
+      var blob = new Blob(["\ufeff" + VCARD], { type: "text/vcard;charset=utf-8" });
+      var url  = URL.createObjectURL(blob);
+
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "Mohamed-Abdelwahab-Elbadawi.vcf";
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+
+      showToast("تم تنزيل بطاقة الاتصال ✓ افتح الملف لإضافته إلى جهات الاتصال");
+    }catch(e){
+      showToast("تعذّر التنزيل تلقائياً — يمكنك حفظ الرقم يدوياً: " + PHONE_INTL);
+    }
+  });
+</script>
+
+</body>
+</html>
